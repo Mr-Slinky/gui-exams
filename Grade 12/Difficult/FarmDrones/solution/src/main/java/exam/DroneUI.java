@@ -1,4 +1,4 @@
-package exam.fun_exam;
+package exam;
 
 public class DroneUI {
 

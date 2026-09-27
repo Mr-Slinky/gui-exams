@@ -1,7 +1,7 @@
-package exam.fun_exam;
+package exam;
 
-import exam.fun_exam.internal.Drone;
-import exam.fun_exam.internal.Manager;
+import exam.internal.Drone;
+import exam.internal.Manager;
 
 import java.io.File;
 import java.io.IOException;

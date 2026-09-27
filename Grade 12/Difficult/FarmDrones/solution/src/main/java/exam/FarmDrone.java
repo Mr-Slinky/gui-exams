@@ -1,6 +1,6 @@
-package exam.fun_exam;
+package exam;
 
-import exam.fun_exam.internal.Drone;
+import exam.internal.Drone;
 
 import java.time.LocalDate;
 import java.time.Period;

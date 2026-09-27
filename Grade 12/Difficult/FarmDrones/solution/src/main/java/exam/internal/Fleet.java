@@ -1,4 +1,4 @@
-package exam.fun_exam.internal;
+package exam.internal;
 
 import java.util.ArrayList;
 import java.util.List;
