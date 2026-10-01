@@ -19,6 +19,7 @@ The repository sorts papers by grade and then by difficulty:
 ```
 Grade 10/
     Easy/
+        GreatestCommonDivisor/
     Moderate/
         SimplifiedFractions/
     Difficult/
@@ -33,6 +34,7 @@ Grade 12/
 
 | Grade | Difficulty | Paper                                                               | Topic                       |
 |-------|------------|---------------------------------------------------------------------|-----------------------------|
+| 10    | Easy       | [Greatest Common Divisor](Grade%2010/Easy/GreatestCommonDivisor)    | Loops and trace tables      |
 | 10    | Moderate   | [Simplified Fractions](Grade%2010/Moderate/SimplifiedFractions)     | Loops and lists             |
 | 12    | Difficult  | [Farm Drones](Grade%2012/Difficult/FarmDrones/QuestionPaper.pdf)    | Object-oriented programming |
 
@@ -47,8 +49,8 @@ A paper folder has up to four parts:
 | `starting_code/`    | The `exam.internal` package, which draws the window and checks the learner's work |
 | `solution/`         | The classes a worked answer adds to the `exam` package                        |
 
-Farm Drones has all four parts. Simplified Fractions consists of the two code folders, and the
-section below sets its task.
+Farm Drones has all four parts. Greatest Common Divisor and Simplified Fractions each consist of the
+two code folders, and the sections below set their tasks.
 
 `starting_code/` contains the only copy of `exam.internal`. A worked answer compiles once its
 classes are copied into `starting_code/`, beside that package.
@@ -56,6 +58,27 @@ classes are copied into `starting_code/`, beside that package.
 The learner writes their classes in the `exam` package, next to `exam.internal`. The question paper
 tells them to leave every file in `exam.internal` as it is. Every class in that package has
 documentation written for the learner, so reading it is part of the exam.
+
+## Greatest Common Divisor
+
+Greatest Common Divisor is a Grade 10 paper built around one method. The learner writes a class
+that extends `Solution` and overrides `gcd(small, big)`, which returns the largest number that
+divides both parameters exactly. The learner then calls `launch()` on an object of that class.
+
+The window calls `gcd` with five pairs of numbers that it chooses, and plays each call back as a
+trace table:
+
+- The learner's code is on the left, with the line that is running highlighted.
+- The table has a column for each variable and a column for each test in a condition. One cell
+  fills in per step, and a new row starts each time a loop goes round.
+- Buttons under the table pause the replay, step it forwards or backwards, and change its speed.
+
+The learner passes when all five answers are right. The window also counts the rows each call
+fills, and shows that count beside the count for Euclid's algorithm. A solution that counts down
+from `small` fills 35 rows over the five calls, and Euclid's algorithm fills 21.
+
+The window shows the code and labels the condition columns from the learner's `.java` file. It
+looks for that file in the folder the program runs from.
 
 ## Simplified Fractions
 
@@ -105,6 +128,6 @@ who changes that file name to `jobs_difficult.txt` therefore sees the 18 fields,
 
 ## Requirements
 
-A learner needs Java 25 or later. The Farm Drones window finds the learner's jobs file by reading
-the compiled `DroneManager` class through the `java.lang.classfile` API. The window uses Swing,
+A learner needs Java 25 or later. The Farm Drones window and the Greatest Common Divisor window both
+read the learner's compiled class through the `java.lang.classfile` API. Every window uses Swing,
 which ships with the JDK, so the exams need no other libraries and no build tool.
