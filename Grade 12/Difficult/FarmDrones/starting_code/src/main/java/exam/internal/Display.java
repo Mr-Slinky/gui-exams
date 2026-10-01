@@ -9,6 +9,13 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.classfile.ClassFile;
+import java.lang.classfile.ClassModel;
+import java.lang.classfile.CodeElement;
+import java.lang.classfile.MethodModel;
+import java.lang.classfile.instruction.ConstantInstruction;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +32,8 @@ import java.util.List;
  * It then draws the result about sixty times a second:
  *
  * <ul>
- *   <li>the farm, with a dry brown patch for every field in {@code jobs.txt} and a label saying how many litres
- *   it needs</li>
+ *   <li>the farm, with a dry brown patch for every field in the jobs file your {@code processJobs()} reads, and a
+ *   label saying how many litres it needs</li>
  *   <li>your drones, which take off from their bays, fly to each field your script sends them to and spray it</li>
  *   <li>a panel on the right. Before {@code processJobs()} returns anything, it lists the lines of your
  *   {@code toString()}. Once there is a script, it lists the script, one line at a time. Either way, each line is
@@ -52,7 +59,10 @@ public class Display extends JPanel {
     private static final int MIN_COLS  = 10;
     private static final int MIN_ROWS  = 8;
 
-    private static final double DRONE_SIZE    = CELL * 0.7;
+    // Drawn only while your DroneManager has yet to open a jobs file of its own
+    private static final String DEFAULT_JOBS_FILE = "jobs.txt";
+
+    private static final double DRONE_SIZE   = CELL * 0.7;
     private static final double ROTOR_SPEED   = 22;   // radians per second while flying
     private static final double VERDICT_DELAY = 0.6;  // seconds between the last drone finishing and the banner
 
@@ -172,11 +182,51 @@ public class Display extends JPanel {
 
     private Replay.Job[] loadJobs() {
         try {
-            return Replay.readJobs("jobs.txt");
+            return Replay.readJobs(findJobsFile());
         } catch (RuntimeException ex) {
             errors.add(ex.getMessage());
             return new Replay.Job[0];
         }
+    }
+
+    // The fields come from whichever .txt file your DroneManager opens for its jobs. A file name written in the
+    // source is a string constant in the compiled class. The first .txt constant that processJobs() loads is taken
+    // as the jobs file, and after that the first one anywhere else in the class. A name the class builds at run
+    // time goes unseen, and the display then falls back to jobs.txt.
+    private String findJobsFile() {
+        Class<?> type = manager.getClass();
+        String   name = type.getName();
+        try (InputStream in = type.getResourceAsStream(name.substring(name.lastIndexOf('.') + 1) + ".class")) {
+            if (in == null) {
+                return DEFAULT_JOBS_FILE;
+            }
+            ClassModel model = ClassFile.of().parse(in.readAllBytes());
+            String     file  = findTextFile(model, true);
+            if (file == null) {
+                file = findTextFile(model, false);
+            }
+            return file == null ? DEFAULT_JOBS_FILE : file;
+        } catch (IOException | IllegalArgumentException ex) {
+            return DEFAULT_JOBS_FILE;
+        }
+    }
+
+    // Returns the first .txt constant other than the fleet file, searching processJobs() alone or every other method
+    private static String findTextFile(ClassModel model, boolean inProcessJobs) {
+        for (MethodModel method : model.methods()) {
+            if (method.methodName().equalsString("processJobs") != inProcessJobs || method.code().isEmpty()) {
+                continue;
+            }
+            for (CodeElement element : method.code().get()) {
+                if (element instanceof ConstantInstruction constant
+                    && constant.constantValue() instanceof String text
+                    && text.endsWith(".txt")
+                    && !text.equals(Manager.FLEET_FILE)) {
+                    return text;
+                }
+            }
+        }
+        return null;
     }
 
     private String loadScript() {

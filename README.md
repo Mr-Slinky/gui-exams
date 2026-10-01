@@ -99,7 +99,12 @@ and a banner in the window says so.
 the worked answer waters all of them. `jobs_difficult.txt` lists 18 fields. Question 5 gives each
 field to the first drone able to water it, and that rule leaves two of the 18 fields dry.
 
+The window draws the fields from whichever text file the learner's `processJobs` opens. A learner
+who changes that file name to `jobs_difficult.txt` therefore sees the 18 fields, with every file in
+`exam.internal` left as it is.
+
 ## Requirements
 
-The provided code uses Java records, so a learner needs Java 16 or later. The window uses Swing,
+A learner needs Java 25 or later. The Farm Drones window finds the learner's jobs file by reading
+the compiled `DroneManager` class through the `java.lang.classfile` API. The window uses Swing,
 which ships with the JDK, so the exams need no other libraries and no build tool.
