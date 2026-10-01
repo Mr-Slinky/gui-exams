@@ -10,12 +10,6 @@ import java.util.Scanner;
  * Plays three lists on the fraction wall, one after another in the same window: a list with every kind of mistake,
  * a list with no fractions in it at all, and the correct list. Press Enter in the console to move on to the next
  * list.
- *
- * @author Kheagen Haskins
- * @version 1.0.0
- *         <p>
- *         Last modified: 2026-10-01
- * @since 1.0.0
  */
 public class Showcase {
 

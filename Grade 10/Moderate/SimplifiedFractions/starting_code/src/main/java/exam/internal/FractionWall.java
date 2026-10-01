@@ -43,12 +43,6 @@ import java.util.List;
  * Once your list has played, every outline that is still empty turns amber, because those fractions are missing from
  * your list. A banner then says whether you passed. You pass when every outline is filled and nothing is red. Click
  * anywhere to watch it again.
- *
- * @author Kheagen Haskins
- * @version 1.0.0
- *         <p>
- *         Last modified: 2026-10-01
- * @since 1.0.0
  */
 public final class FractionWall {
 

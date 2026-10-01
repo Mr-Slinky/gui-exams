@@ -21,12 +21,6 @@ import java.util.Set;
  * </pre>
  *
  * Text that is not a fraction plays last, and the outlines left empty after that are marked as missing.
- *
- * @author Kheagen Haskins
- * @version 1.0.0
- *         <p>
- *         Last modified: 2026-10-01
- * @since 1.0.0
  */
 final class Replay {
 

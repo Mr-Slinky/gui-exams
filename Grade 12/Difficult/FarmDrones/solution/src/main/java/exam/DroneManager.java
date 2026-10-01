@@ -22,12 +22,6 @@ import java.util.Scanner;
  * DroneManager m = new DroneManager();  // reads drones.txt
  * m.launch();                           // opens the window, which calls toString() and processJobs()
  * }</pre>
- *
- * @author Kheagen Haskins
- * @version 1.0.0
- *         <p>
- *         Last modified: 2026-10-01
- * @since 1.0.0
  */
 public class DroneManager extends Manager {
 

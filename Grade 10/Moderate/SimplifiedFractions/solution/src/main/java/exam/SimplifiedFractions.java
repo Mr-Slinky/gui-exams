@@ -8,12 +8,6 @@ import java.util.List;
 /**
  * Lists every simplified fraction between 0 and 1 whose denominator is at most {@code n}, and shows the list on a
  * fraction wall.
- *
- * @author Kheagen Haskins
- * @version 1.0.0
- *         <p>
- *         Last modified: 2026-10-01
- * @since 1.0.0
  */
 public class SimplifiedFractions {
 

@@ -25,12 +25,6 @@ import java.util.List;
  *
  * The window shrinks to fit a small screen. Once the last fraction has played, a banner says whether you passed.
  * Click anywhere to watch it again.
- *
- * @author Kheagen Haskins
- * @version 1.0.0
- *         <p>
- *         Last modified: 2026-10-01
- * @since 1.0.0
  */
 final class Display extends JPanel {
 
