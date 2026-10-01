@@ -25,7 +25,7 @@ import java.util.List;
  * It then draws the result about sixty times a second:
  *
  * <ul>
- *   <li>the farm, with a dry brown patch for every field in {@code jobs_easy.txt} and a label saying how many litres
+ *   <li>the farm, with a dry brown patch for every field in {@code jobs.txt} and a label saying how many litres
  *   it needs</li>
  *   <li>your drones, which take off from their bays, fly to each field your script sends them to and spray it</li>
  *   <li>a panel on the right. Before {@code processJobs()} returns anything, it lists the lines of your
@@ -172,7 +172,7 @@ public class Display extends JPanel {
 
     private Replay.Job[] loadJobs() {
         try {
-            return Replay.readJobs("jobs_easy.txt");
+            return Replay.readJobs("jobs.txt");
         } catch (RuntimeException ex) {
             errors.add(ex.getMessage());
             return new Replay.Job[0];

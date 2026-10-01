@@ -22,7 +22,7 @@ import java.util.Scanner;
  * Build your manager first, then launch it:
  *
  * <pre>{@code
- * DroneManager m = new DroneManager();  // your constructor reads the files
+ * DroneManager m = new DroneManager();  // your constructor reads drones.txt
  * m.launch();                           // the window opens and the replay starts
  * }</pre>
  */
@@ -65,7 +65,7 @@ public class Manager {
     }
 
     /**
-     * Assigns every job in {@code jobs_easy.txt} to a drone and returns the script the replay plays out. This is the
+     * Assigns every job in {@code jobs.txt} to a drone and returns the script the replay plays out. This is the
      * method you write in {@code DroneManager}.
      * <p>
      * Until you write it, this version returns an empty script. Your drones then sit in their bays and the replay

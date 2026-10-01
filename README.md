@@ -20,6 +20,7 @@ The repository sorts papers by grade and then by difficulty:
 Grade 10/
     Easy/
     Moderate/
+        SimplifiedFractions/
     Difficult/
 Grade 11/
     ...
@@ -30,24 +31,52 @@ Grade 12/
         FarmDrones/
 ```
 
-| Grade | Difficulty | Paper                                                         | Topic                       |
-|-------|------------|---------------------------------------------------------------|-----------------------------|
-| 12    | Difficult  | [Farm Drones](Grade%2012/Difficult/FarmDrones/QuestionPaper.pdf) | Object-oriented programming |
+| Grade | Difficulty | Paper                                                               | Topic                       |
+|-------|------------|---------------------------------------------------------------------|-----------------------------|
+| 10    | Moderate   | [Simplified Fractions](Grade%2010/Moderate/SimplifiedFractions)     | Loops and lists             |
+| 12    | Difficult  | [Farm Drones](Grade%2012/Difficult/FarmDrones/QuestionPaper.pdf)    | Object-oriented programming |
 
 ## Inside a paper
 
-Every paper folder has the same four parts:
+A paper folder has up to four parts:
 
 | Part                | Contents                                                                      |
 |---------------------|-------------------------------------------------------------------------------|
 | `QuestionPaper.pdf` | The question paper the learner works from                                     |
 | `data_files/`       | The text files the learner's program reads                                    |
 | `starting_code/`    | The `exam.internal` package, which draws the window and checks the learner's work |
-| `solution/`         | A worked answer, alongside the same `exam.internal` package                   |
+| `solution/`         | The classes a worked answer adds to the `exam` package                        |
+
+Farm Drones has all four parts. Simplified Fractions consists of the two code folders, and the
+section below sets its task.
+
+`starting_code/` contains the only copy of `exam.internal`. A worked answer compiles once its
+classes are copied into `starting_code/`, beside that package.
 
 The learner writes their classes in the `exam` package, next to `exam.internal`. The question paper
 tells them to leave every file in `exam.internal` as it is. Every class in that package has
 documentation written for the learner, so reading it is part of the exam.
+
+## Simplified Fractions
+
+Simplified Fractions is a Grade 10 paper built around one method. The learner writes `simpFrac(n)`,
+which returns every fraction between 0 and 1 that is in its simplest form and has a denominator
+from 2 to `n`. Each fraction is a string such as `"3/4"`. The learner then passes the same `n` and
+the returned list to `FractionWall.show`.
+
+The window draws a fraction wall, with one table for each denominator from 2 to `n`. Every table is
+the same width, so two fractions of the same size end at the same point. The wall first shows an
+empty outline for every fraction the list should contain, and then plays the list one fraction at
+a time:
+
+- A correct fraction fills its outline in green.
+- A fraction that can be simplified, such as 2/4, or one that appears twice, fills a red row and
+  then slides up onto the fraction of the same size.
+- Once the list has played, every outline that is still empty turns amber, because the list is
+  missing that fraction.
+
+The learner passes when every outline is filled and nothing is red. The wall draws an `n` from 2
+to 10.
 
 ## Farm Drones
 
@@ -65,6 +94,10 @@ The window checks the work in two stages:
 
 The paper has no marks. The learner passes when every field has received all the water it needs,
 and a banner in the window says so.
+
+`data_files/` contains two lists of fields. The paper uses `jobs.txt`, which lists 14 fields, and
+the worked answer waters all of them. `jobs_difficult.txt` lists 18 fields. Question 5 gives each
+field to the first drone able to water it, and that rule leaves two of the 18 fields dry.
 
 ## Requirements
 

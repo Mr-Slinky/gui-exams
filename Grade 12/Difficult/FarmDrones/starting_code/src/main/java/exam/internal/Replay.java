@@ -58,7 +58,7 @@ final class Replay {
     }
 
     /**
-     * Reads {@code jobs_easy.txt}, where each line is a cell and the litres that cell needs.
+     * Reads a jobs file, where each line is a cell and the litres that cell needs.
      *
      * <pre>
      * F12;25  ->  the field at F12 needs 25 litres

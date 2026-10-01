@@ -14,8 +14,8 @@ import java.util.Scanner;
  * @author Kheagen Haskins
  * @version 1.0.0
  *         <p>
- *         Last modified: 2026-09-27
- * @since 2.0.0
+ *         Last modified: 2026-10-01
+ * @since 1.0.0
  */
 public class Showcase {
 

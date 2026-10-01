@@ -70,7 +70,7 @@ public abstract class Drone {
 
     /**
      * Returns the colour of this drone as a hex string, such as {@code "#FF6A00"}. The display paints your
-     * drone in this colour, so pick carefully when you get to choose.
+     * drone in this colour.
      *
      * @return the colour as a hex string
      */

@@ -8,8 +8,26 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * `_` to be replaced with Noun when exam questions are settled.
+ * The worked answer to Questions 2 and 5 of the Farm Drones paper.
+ * <p>
+ * The constructor reads up to ten {@link FarmDrone} objects from {@code drones.txt}.
+ * {@link #assignJob(String, double)} gives a field to the first drone in the array that has the battery and the
+ * water for it. {@link #processJobs()} calls it once for each line of {@code jobs.txt} and joins the results into
+ * the script the display replays.
  *
+ * <h2 id="usage">Usage</h2>
+ * {@link DroneUI} builds the manager and then launches it:
+ *
+ * <pre>{@code
+ * DroneManager m = new DroneManager();  // reads drones.txt
+ * m.launch();                           // opens the window, which calls toString() and processJobs()
+ * }</pre>
+ *
+ * @author Kheagen Haskins
+ * @version 1.0.0
+ *         <p>
+ *         Last modified: 2026-10-01
+ * @since 1.0.0
  */
 public class DroneManager extends Manager {
 
@@ -43,7 +61,7 @@ public class DroneManager extends Manager {
     // ========================================================================================== \\
     //                                        API Methods                                         \\
     // ========================================================================================== \\
-    // Overload methods defined in manager. These will be invoked by Display::paintComponent
+    // toString() and processJobs() override Manager, and Display calls each of them once when the window opens
 
     @Override
     public String toString() {
@@ -56,7 +74,7 @@ public class DroneManager extends Manager {
 
     public String processJobs() {
         StringBuilder str = new StringBuilder();
-        try (Scanner in = new Scanner(new File("jobs_easy.txt"))) {
+        try (Scanner in = new Scanner(new File("jobs.txt"))) {
             while (in.hasNextLine()) {
                 String[] data = in.nextLine().split(";");
                 String location = data[0];
